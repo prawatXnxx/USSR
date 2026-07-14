@@ -129,11 +129,11 @@ export default function Footer() {
           <div className="lg:col-span-3 space-y-4" id="footer-col-contact">
             <h4 className="text-slate-950 text-xs font-black uppercase tracking-widest mb-4">Contact Us</h4>
             <div className="space-y-3.5 text-xs text-slate-600" id="contact-lines">
-              <a href="mailto:growth@ustechrepairs.net" className="flex items-center gap-2.5 hover:text-[#009CFF] transition-colors">
+              <a href="mailto:support@ustechrepairs.net" className="flex items-center gap-2.5 hover:text-[#009CFF] transition-colors">
                 <div className="w-7 h-7 rounded-lg bg-white/40 backdrop-blur-sm border border-white/60 flex items-center justify-center text-[#009CFF] shrink-0">
                   <Mail className="w-3.5 h-3.5" />
                 </div>
-                <span className="truncate">growth@ustechrepairs.net</span>
+                <span className="truncate">support@ustechrepairs.net</span>
               </a>
 
               <a href="tel:855-845-6558" className="flex items-center gap-2.5 hover:text-[#009CFF] transition-colors font-mono font-medium">

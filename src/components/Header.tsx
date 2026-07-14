@@ -60,8 +60,8 @@ export default function Header({ onOpenAudit, onOpenCall }: HeaderProps) {
           <span className="hidden lg:inline text-slate-300 font-mono">ustechrepairs.net</span>
         </div>
         <div className="flex items-center gap-4">
-          <a href="mailto:growth@ustechrepairs.net" className="hover:text-[#009CFF] transition-colors text-slate-300">
-            growth@ustechrepairs.net
+          <a href="mailto:support@ustechrepairs.net" className="hover:text-[#009CFF] transition-colors text-slate-300">
+            support@ustechrepairs.net
           </a>
           <a href="tel:855-845-6558" className="flex items-center gap-1 hover:text-[#009CFF] transition-colors text-slate-300 font-semibold">
             <span>☎ 855-845-6558</span>
