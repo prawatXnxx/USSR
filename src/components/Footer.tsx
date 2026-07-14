@@ -2,8 +2,6 @@ import React from "react";
 import { Mail, Phone, ArrowRight, ShieldCheck, Linkedin, Twitter, Facebook, ArrowUp, MapPin } from "lucide-react";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   const servicesLinks = [
     { name: "SEO Optimization", href: "#services" },
     { name: "Google Ads (PPC)", href: "#services" },
@@ -18,13 +16,6 @@ export default function Footer() {
     { name: "Case Studies / Stories", href: "#case-studies" },
     { name: "Growth Pricing plans", href: "#pricing" },
     { name: "Frequently Asked Questions", href: "#faq" }
-  ];
-
-  const policyLinks = [
-    { name: "Privacy Policy", href: "#" },
-    { name: "Terms & Conditions", href: "#" },
-    { name: "Cookie Guidelines", href: "#" },
-    { name: "Sitemap", href: "/sitemap.xml" }
   ];
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, selector: string) => {
@@ -53,10 +44,10 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Directory Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-slate-200" id="footer-links-grid">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-slate-200" id="footer-links-grid">
           
           {/* Brand Information Column */}
-          <div className="lg:col-span-4 space-y-4" id="footer-col-brand">
+          <div className="sm:col-span-2 lg:col-span-4 space-y-4" id="footer-col-brand">
             <a href="#" className="flex items-center gap-2 group" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
               <div className="w-10 h-10 rounded-xl bg-[#009CFF] flex items-center justify-center text-white font-bold text-lg">
                 US
@@ -90,7 +81,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links Column (Services) */}
-          <div className="lg:col-span-2.5" id="footer-col-services">
+          <div className="lg:col-span-3" id="footer-col-services">
             <h4 className="text-slate-950 text-xs font-black uppercase tracking-widest mb-4">Our Services</h4>
             <ul className="space-y-2.5 text-xs">
               {servicesLinks.map((link) => (
@@ -108,7 +99,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links Column (Resources) */}
-          <div className="lg:col-span-2.5" id="footer-col-resources">
+          <div className="lg:col-span-2" id="footer-col-resources">
             <h4 className="text-slate-950 text-xs font-black uppercase tracking-widest mb-4">Resources</h4>
             <ul className="space-y-2.5 text-xs">
               {resourceLinks.map((link) => (
@@ -166,13 +157,6 @@ export default function Footer() {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400" id="footer-lower-bar">
           <div className="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-6 text-center sm:text-left">
             <span>Founded in 2025 &bull; Incorporated in April 2026 &bull; USTechRepairs.net. All rights reserved.</span>
-            <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
-              {policyLinks.map((link) => (
-                <a key={link.name} href={link.href} className="hover:text-[#009CFF] transition-colors">
-                  {link.name}
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Scroll to Top Trigger */}
