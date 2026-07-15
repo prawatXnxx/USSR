@@ -42,6 +42,20 @@ export default function OurProcess() {
     }
   ];
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, selector: string) => {
+    e.preventDefault();
+    const targetElement = document.querySelector(selector);
+    if (targetElement) {
+      const headerOffset = 80;
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
     <section className="py-20 bg-white relative overflow-hidden" id="process">
       {/* Background visual elements */}
@@ -116,6 +130,7 @@ export default function OurProcess() {
           </p>
           <a
             href="#hero-section"
+            onClick={(e) => handleSmoothScroll(e, "#hero-section")}
             className="inline-flex items-center gap-2 bg-[#009CFF] hover:bg-[#0086db] text-white font-bold text-xs px-6 py-3 rounded-xl transition-all shadow-md shadow-sky-50"
           >
             Claim Free Audit Report

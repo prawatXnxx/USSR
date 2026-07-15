@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { 
   Search, TrendingUp, Users, MessageSquare, Code, FileText, 
   Palette, Mail, Target, Cpu, MapPin, ShoppingBag, 
-  ArrowRight, Check, X, ShieldCheck, Sparkles 
+  ArrowRight, Check, X, ShieldCheck, Sparkles,
+  MessageCircle, Video, Megaphone, Briefcase, BarChart3
 } from "lucide-react";
 import { servicesData } from "../data/services";
 import { Service } from "../types";
@@ -21,14 +22,20 @@ const IconMap: Record<string, React.ComponentType<any>> = {
   Target,
   Cpu,
   MapPin,
-  ShoppingBag
+  ShoppingBag,
+  MessageCircle,
+  Video,
+  Megaphone,
+  Briefcase,
+  BarChart3
 };
 
 interface ServicesProps {
   onOpenAudit: () => void;
+  onNavigate?: (path: string) => void;
 }
 
-export default function Services({ onOpenAudit }: ServicesProps) {
+export default function Services({ onOpenAudit, onNavigate }: ServicesProps) {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
 
   return (
@@ -48,9 +55,9 @@ export default function Services({ onOpenAudit }: ServicesProps) {
           </p>
         </div>
 
-        {/* Services Grid (12 Cards) */}
+        {/* Services Grid (Slices to 12 featured services) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" id="services-grid">
-          {servicesData.map((service, idx) => {
+          {servicesData.slice(0, 12).map((service, idx) => {
             const IconComponent = IconMap[service.icon] || Search;
             return (
               <motion.div
@@ -94,6 +101,20 @@ export default function Services({ onOpenAudit }: ServicesProps) {
             );
           })}
         </div>
+
+        {/* View All CTA */}
+        {onNavigate && (
+          <div className="mt-16 text-center" id="services-view-all-wrapper">
+            <button
+              onClick={() => onNavigate("/services")}
+              className="inline-flex items-center gap-2 bg-[#EAF7FF] hover:bg-[#009CFF] text-[#009CFF] hover:text-white font-bold text-sm px-8 py-4 rounded-xl transition-all shadow-md shadow-sky-50/50 cursor-pointer"
+              id="services-view-all-btn"
+            >
+              Explore All 18 Specialized Services
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
 
         {/* Dynamic Service Detail Modal */}
         <AnimatePresence>

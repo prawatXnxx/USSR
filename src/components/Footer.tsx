@@ -1,26 +1,43 @@
 import React from "react";
 import { Mail, Phone, ArrowRight, ShieldCheck, Linkedin, Twitter, Facebook, ArrowUp, MapPin } from "lucide-react";
 
-export default function Footer() {
+interface FooterProps {
+  currentPath: string;
+  onNavigate: (path: string) => void;
+}
+
+export default function Footer({ currentPath, onNavigate }: FooterProps) {
   const servicesLinks = [
-    { name: "SEO Optimization", href: "#services" },
-    { name: "Google Ads (PPC)", href: "#services" },
-    { name: "Meta Ads (FB/IG)", href: "#services" },
-    { name: "Social Media Marketing", href: "#services" },
-    { name: "Website Development", href: "#services" },
-    { name: "Brand Identity", href: "#services" }
+    { name: "SEO Optimization", href: "/services" },
+    { name: "Google Ads (PPC)", href: "/services" },
+    { name: "Meta Ads (FB/IG)", href: "/services" },
+    { name: "Social Media Marketing", href: "/services" },
+    { name: "Website Development", href: "/services" },
+    { name: "Brand Identity", href: "/services" }
   ];
 
   const resourceLinks = [
+    { name: "About Our Agency", href: "/about" },
+    { name: "Our Work Portfolio", href: "/portfolio" },
+    { name: "Contact Our Experts", href: "/contact" },
     { name: "Free Website Audit", href: "#hero-section" },
-    { name: "Case Studies / Stories", href: "#case-studies" },
-    { name: "Growth Pricing plans", href: "#pricing" },
-    { name: "Frequently Asked Questions", href: "#faq" }
+    { name: "Growth Pricing plans", href: "/pricing" },
+    { name: "Frequently Asked Questions", href: "/faq" }
   ];
 
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, selector: string) => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const targetElement = document.querySelector(selector);
+    if (href === "/services" || href === "/about" || href === "/portfolio" || href === "/pricing" || href === "/faq" || href === "/contact") {
+      onNavigate(href);
+      return;
+    }
+
+    if (currentPath !== "/") {
+      onNavigate("/" + href);
+      return;
+    }
+
+    const targetElement = document.querySelector(href);
     if (targetElement) {
       const headerOffset = 80;
       const elementPosition = targetElement.getBoundingClientRect().top;
@@ -48,7 +65,7 @@ export default function Footer() {
           
           {/* Brand Information Column */}
           <div className="sm:col-span-2 lg:col-span-4 space-y-4" id="footer-col-brand">
-            <a href="#" className="flex items-center gap-2 group" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
+            <a href="/" className="flex items-center gap-2 group" onClick={(e) => { e.preventDefault(); onNavigate("/"); }}>
               <div className="w-10 h-10 rounded-xl bg-[#009CFF] flex items-center justify-center text-white font-bold text-lg">
                 US
               </div>
@@ -88,7 +105,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    onClick={(e) => handleSmoothScroll(e, link.href)}
+                    onClick={(e) => handleLinkClick(e, link.href)}
                     className="text-slate-500 hover:text-[#009CFF] transition-colors"
                   >
                     {link.name}
@@ -106,7 +123,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    onClick={(e) => handleSmoothScroll(e, link.href)}
+                    onClick={(e) => handleLinkClick(e, link.href)}
                     className="text-slate-500 hover:text-[#009CFF] transition-colors"
                   >
                     {link.name}

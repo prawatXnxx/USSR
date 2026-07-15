@@ -5,9 +5,11 @@ import { motion, AnimatePresence } from "motion/react";
 interface HeaderProps {
   onOpenAudit: () => void;
   onOpenCall: () => void;
+  currentPath: string;
+  onNavigate: (path: string) => void;
 }
 
-export default function Header({ onOpenAudit, onOpenCall }: HeaderProps) {
+export default function Header({ onOpenAudit, onOpenCall, currentPath, onNavigate }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -24,17 +26,28 @@ export default function Header({ onOpenAudit, onOpenCall }: HeaderProps) {
   }, []);
 
   const navLinks = [
-    { name: "Services", href: "#services" },
-    { name: "Why Choose Us", href: "#why-choose-us" },
-    { name: "Our Process", href: "#process" },
-    { name: "Success Stories", href: "#case-studies" },
-    { name: "Pricing Plans", href: "#pricing" },
-    { name: "FAQ", href: "#faq" }
+    { name: "Services", href: "/services" },
+    { name: "About Us", href: "/about" },
+    { name: "Portfolio", href: "/portfolio" },
+    { name: "Pricing Plans", href: "/pricing" },
+    { name: "FAQ", href: "/faq" },
+    { name: "Contact Us", href: "/contact" }
   ];
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsOpen(false);
+
+    if (href === "/services" || href === "/about" || href === "/portfolio" || href === "/pricing" || href === "/faq" || href === "/contact") {
+      onNavigate(href);
+      return;
+    }
+
+    if (currentPath !== "/") {
+      onNavigate("/" + href);
+      return;
+    }
+
     const targetElement = document.querySelector(href);
     if (targetElement) {
       const headerOffset = 80;
@@ -50,22 +63,12 @@ export default function Header({ onOpenAudit, onOpenCall }: HeaderProps) {
   return (
     <>
       {/* Top micro bar for corporate credentials */}
-      <div className="w-full bg-slate-900 text-white text-xs py-2 px-4 md:px-8 flex justify-between items-center z-40 relative" id="top-micro-bar">
-        <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1.5 text-slate-300">
-            <span className="w-2 h-2 rounded-full bg-[#009CFF] animate-pulse" />
+      <div className="w-full bg-slate-900 text-white text-xs py-2.5 px-4 flex justify-center items-center z-40 relative" id="top-micro-bar">
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#009CFF] animate-pulse" />
+          <span className="text-slate-200 font-semibold tracking-wide">
             #1 Results-Driven Digital Marketing Agency
           </span>
-          <span className="hidden lg:inline text-slate-400">|</span>
-          <span className="hidden lg:inline text-slate-300 font-mono">ustechrepairs.net</span>
-        </div>
-        <div className="flex items-center gap-4">
-          <a href="mailto:support@ustechrepairs.net" className="hover:text-[#009CFF] transition-colors text-slate-300">
-            support@ustechrepairs.net
-          </a>
-          <a href="tel:855-845-6558" className="flex items-center gap-1 hover:text-[#009CFF] transition-colors text-slate-300 font-semibold">
-            <span>☎ 855-845-6558</span>
-          </a>
         </div>
       </div>
 
@@ -79,7 +82,7 @@ export default function Header({ onOpenAudit, onOpenCall }: HeaderProps) {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group" id="brand-logo" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
+          <a href="/" className="flex items-center gap-2 group" id="brand-logo" onClick={(e) => { e.preventDefault(); onNavigate("/"); }}>
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#009CFF] to-sky-400 flex items-center justify-center text-white font-bold text-lg shadow-md shadow-sky-100 group-hover:scale-105 transition-all">
               US
             </div>
@@ -95,17 +98,22 @@ export default function Header({ onOpenAudit, onOpenCall }: HeaderProps) {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-6 lg:gap-8" id="desktop-navigation">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleLinkClick(e, link.href)}
-                className="text-sm font-medium text-slate-600 hover:text-[#009CFF] transition-colors relative py-1 group"
-              >
-                {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#009CFF] transition-all group-hover:w-full" />
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = currentPath === link.href;
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => handleLinkClick(e, link.href)}
+                  className={`text-sm font-semibold transition-colors relative py-1 group ${
+                    isActive ? "text-[#009CFF]" : "text-slate-600 hover:text-[#009CFF]"
+                  }`}
+                >
+                  {link.name}
+                  <span className={`absolute bottom-0 left-0 h-0.5 bg-[#009CFF] transition-all ${isActive ? "w-full" : "w-0 group-hover:w-full"}`} />
+                </a>
+              );
+            })}
           </nav>
 
           {/* CTA & Mobile trigger */}

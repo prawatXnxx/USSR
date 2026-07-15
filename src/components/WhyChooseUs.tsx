@@ -36,6 +36,20 @@ export default function WhyChooseUs() {
     }
   ];
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, selector: string) => {
+    e.preventDefault();
+    const targetElement = document.querySelector(selector);
+    if (targetElement) {
+      const headerOffset = 80;
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
     <section className="py-20 bg-slate-50/40 relative overflow-hidden" id="why-choose-us">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,7 +112,11 @@ export default function WhyChooseUs() {
               <p className="text-slate-500 text-xs md:text-sm">We believe in our results. All our primary packages are structured on a monthly basis. We retain our clients by generating continuous profitable revenue, not legal paperwork.</p>
             </div>
           </div>
-          <a href="#pricing" className="bg-[#EAF7FF] hover:bg-[#009CFF] text-[#009CFF] hover:text-white px-5 py-3 rounded-xl font-semibold text-xs md:text-sm whitespace-nowrap transition-colors">
+          <a
+            href="#pricing"
+            onClick={(e) => handleSmoothScroll(e, "#pricing")}
+            className="bg-[#EAF7FF] hover:bg-[#009CFF] text-[#009CFF] hover:text-white px-5 py-3 rounded-xl font-semibold text-xs md:text-sm whitespace-nowrap transition-colors"
+          >
             View Flexible Pricing
           </a>
         </div>
