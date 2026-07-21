@@ -85,22 +85,5 @@ export const caseStudiesData: CaseStudy[] = [
       beforeMetric: "Empty Mid-week tables",
       afterMetric: "100% Fully Booked Daily"
     }
-  },
-  {
-    id: "education-leads",
-    title: "3x Admissions Surge for Top EdTech Provider",
-    category: "Education Lead Campaign",
-    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=600",
-    description: "How we generated high-intent student leads for premium professional certification programs with LinkedIn & search ads.",
-    challenge: "With massive competition in the online learning space, the client was paying high acquisition costs for cold, unengaged leads who wouldn't pick up sales calls.",
-    strategy: "We created high-value free Masterclasses and downloadable syllabus assets, gating them behind interactive forms, and targeted exact professional titles on LinkedIn and Google Search.",
-    result: "Delivered 8,500 pre-qualified student enrollments, driving down the program cost per acquisition (CPA) by 54% and tripling student intake.",
-    metrics: {
-      roas: "9.1x ROI",
-      leads: "8,500 qualified enrollments",
-      traffic: "+290% Page Visits",
-      beforeMetric: "$15 CPA",
-      afterMetric: "$7 CPA"
-    }
   }
 ];
